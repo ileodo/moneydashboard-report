@@ -1,0 +1,270 @@
+[
+  {
+    "name": "Mortgage",
+    "categories": [
+      "Mortgage"
+    ],
+    "monthlyBudget": {
+      "amount": 1000,
+      "currency": "GBP"
+    },
+    "monthlyAmount": {
+      "GBP": [
+        800,
+        950,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "name": "Groceries & Eating Out",
+    "categories": [
+      "Groceries",
+      "Eating Out"
+    ],
+    "monthlyBudget": {
+      "amount": 500,
+      "currency": "GBP"
+    },
+    "monthlyAmount": {
+      "GBP": [
+        153.35,
+        350.36,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "name": "Shopping",
+    "categories": [
+      "Shopping",
+      "Personal Care",
+      "Tech Gear",
+      "Clothes"
+    ],
+    "monthlyBudget": {
+      "amount": 500,
+      "currency": "GBP"
+    },
+    "monthlyAmount": {
+      "GBP": [
+        300,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "name": "Other",
+    "categories": [
+      "Experiences",
+      "Holiday",
+      "General",
+      "Giving"
+    ],
+    "monthlyBudget": {
+      "amount": 300,
+      "currency": "GBP"
+    },
+    "monthlyAmount": {
+      "GBP": [
+        300,
+        300,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "name": "Transport",
+    "categories": [
+      "Car",
+      "Transport"
+    ],
+    "monthlyBudget": {
+      "amount": 200,
+      "currency": "GBP"
+    },
+    "monthlyAmount": {
+      "GBP": [
+        36.88,
+        123,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "name": "Bills",
+    "categories": [
+      "Bills"
+    ],
+    "monthlyBudget": {
+      "amount": 300,
+      "currency": "GBP"
+    },
+    "monthlyAmount": {
+      "GBP": [
+        250,
+        460,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "name": "Household",
+    "categories": [
+      "Household"
+    ],
+    "monthlyBudget": {
+      "amount": 100,
+      "currency": "GBP"
+    },
+    "monthlyAmount": {
+      "GBP": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "name": "Saving",
+    "categories": [
+      "Savings"
+    ],
+    "monthlyBudget": {
+      "amount": 400,
+      "currency": "GBP"
+    },
+    "monthlyAmount": {
+      "GBP": [
+        350,
+        400,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "name": "Investment",
+    "categories": [
+      "Investment"
+    ],
+    "monthlyBudget": {
+      "amount": 300,
+      "currency": "GBP"
+    },
+    "monthlyAmount": {
+      "GBP": [
+        300,
+        300,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "name": "Yearly Bill",
+    "categories": [
+      "Yearly Bill"
+    ],
+    "monthlyBudget": {
+      "amount": 150,
+      "currency": "GBP"
+    },
+    "monthlyAmount": {
+      "GBP": [
+        700,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  }
+]
