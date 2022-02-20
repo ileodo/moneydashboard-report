@@ -17,6 +17,11 @@ services:
       target: development-build-stage
       dockerfile: Dockerfile
     container_name: server
+    environment:
+      - REACT_APP_API_HOST=..
+      - PUBLIC_URL=/
+      - USERNAME=unknow
+      - PASSWORD=unknow
     ports:
       - '3000:3000'
     volumes:

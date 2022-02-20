@@ -13,6 +13,7 @@ class BudgetBreakdownRoute implements Routes {
 
   private initializeRoutes() {
     this.router.get(`${this.path}/:year(\\d{4})`, this.budgetBreakdownController.year);
+    this.router.get(`${this.path}/refresh`, this.budgetBreakdownController.refresh);
   }
 }
 
