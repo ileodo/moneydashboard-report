@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile
     container_name: server
     environment:
-      - REACT_APP_API_HOST=..
+      - REACT_APP_API_HOST=.
       - PUBLIC_URL=/
       - USERNAME=unknow
       - PASSWORD=unknow
