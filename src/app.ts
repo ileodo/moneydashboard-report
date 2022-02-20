@@ -80,8 +80,7 @@ class App {
 
   private initializeReactApp() {
     this.app.use(basename, express.static(path.resolve(__dirname, this.env === 'production'?'./public' : '../dist/public')))
-    
-    this.app.get(basename+"/*", (req, res)=>{
+    this.app.get(basename+"*", (req, res)=>{
       console.log(path.resolve(__dirname, '../dist/public', 'index.html'));
       res.sendFile(path.resolve(__dirname, this.env === 'production'?'./public' : '../dist/public', 'index.html'));
     });
