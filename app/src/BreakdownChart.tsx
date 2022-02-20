@@ -1,7 +1,7 @@
 import './App.css';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import ReactECharts from 'echarts-for-react';
-import { MonthlyBudget, MonthlyAmount, BudgetBreakdownRecord, BudgetData, ChartData } from './data.interface'
+import {BudgetBreakdownRecord, BudgetData, ChartData } from './data.interface'
 
 // DEFINE
 const TOTAL_X = 100;
@@ -430,7 +430,7 @@ class ChartRenders {
     }
 
     renderMonthlyBlock = (param: any, api: any) => {
-        if (api.value('name') == "") {
+        if (api.value('name') === "") {
             return {
                 type: 'group',
                 children: [
@@ -489,9 +489,7 @@ interface BreakdownChartProps {
 
 const BreakdownChart: React.FC<BreakdownChartProps> = (props) => {
     const instance = useRef<ReactECharts>(null);
-    const year: number = props.year;
     const month: number = props.month;
-    const showCurrent: boolean = props.showCurrent as boolean;
 
     const budgetBreakdowns: BudgetBreakdownRecord[] = props.value;
 
@@ -738,7 +736,7 @@ const BreakdownChart: React.FC<BreakdownChartProps> = (props) => {
                 align: 'left',
             },
         },
-        data: [[totalBudget / 12 * (props.month + 1), totalAmount]],
+        data: [[totalBudget / 12 * (month + 1), totalAmount]],
     }];
 
 

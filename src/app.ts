@@ -13,7 +13,7 @@ import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
 import path from 'path';
-
+const basename = process.env.PUBLIC_URL || "/";
 class App {
   public app: express.Application;
   public port: string | number;
@@ -53,7 +53,6 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
-    this.app.use(express.static(path.resolve(__dirname, this.env === 'production'?'./public' : '../dist/public')))
   }
 
   private initializeRoutes(routes: Routes[]) {
@@ -80,7 +79,9 @@ class App {
   }
 
   private initializeReactApp() {
-    this.app.get('*', (req, res)=>{
+    this.app.use(basename, express.static(path.resolve(__dirname, this.env === 'production'?'./public' : '../dist/public')))
+    
+    this.app.get(basename+"/*", (req, res)=>{
       console.log(path.resolve(__dirname, '../dist/public', 'index.html'));
       res.sendFile(path.resolve(__dirname, this.env === 'production'?'./public' : '../dist/public', 'index.html'));
     });
