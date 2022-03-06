@@ -40,14 +40,35 @@ function filter(records: BudgetBreakdownRecord[], budgetNames: Set<string>) {
     return records.filter(ele => budgetNames.has(ele["name"]))
 }
 
+function defaultYear(){
+    const date = new Date();
+    return date.getFullYear();
+}
+function defaultMonthlist(y:number){
+    const date = new Date();
+    if (y === date.getFullYear()) {
+        return Array.from({ length: date.getMonth() + 1 }, (v, k) => k);
+    } else {
+        return Array.from({ length: 12 }, (v, k) => k);
+    }
+}
+function defaultMonth(y:number){
+    const date = new Date();
+    if (y === date.getFullYear()) {
+        return date.getMonth();
+    } else {
+        return 12;
+    }
+}
+
 export const App: React.FC<{ demo: boolean }> = (props) => {
-    const [year, setYear] = useState<number>(2022);
-    const [month, setMonth] = useState<number>(1);
+    const [year, setYear] = useState<number>(defaultYear());
+    const [month, setMonth] = useState<number>(defaultMonth(year));
     const [dataset, setDataset] = useState<Map<number, BudgetBreakdownRecord[]>>(new Map());
     const [currentDataset, setCurrentDataset] = useState<BudgetBreakdownRecord[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [showAggregate, setShowAggregate] = useState<boolean>(false);
-    const [monthList, setMonthList] = useState<number[]>(Array.from({ length: 12 }, (v, k) => k + 1));
+    const [monthList, setMonthList] = useState<number[]>(defaultMonthlist(year));
     const [selectedBudget, setSelectedBudget] = useState<Set<string>>(new Set());
     const [demoMode, setDemoMode] = useState<boolean>(props.demo);
     const [loadError, setLoadError] = useState<string | null>(null);
