@@ -5,13 +5,14 @@ ENV REACT_APP_API_HOST .
 ENV PUBLIC_URL /
 ENV PORT 3000
 
-RUN apk add --update python3 make g++ && rm -rf /var/cache/apk/*
 COPY . ./app
 
 WORKDIR /app
 
-RUN npm install --prefix ./app
-RUN npm install
+RUN apk add --update python3 make g++  \
+    && rm -rf /var/cache/apk/* \
+    && npm install --prefix ./app \
+    && npm install
 
 EXPOSE 3000
 
