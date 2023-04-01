@@ -1,6 +1,5 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import BreakdownChart from './BreakdownChart';
 import { Dropdown, Spinner, Container, Alert, Form, ProgressBar, ListGroup, Badge, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import {
@@ -10,7 +9,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-import { BudgetBreakdownRecord } from './data.interface'
+import { BudgetChart, BudgetRecord } from 'budget-view-chart'
 const axios = require('axios').default;
 
 const monthLabels = [
@@ -36,7 +35,7 @@ function displayAmount(amount: number) {
     return formatter.format(amount);
 }
 
-function filter(records: BudgetBreakdownRecord[], budgetNames: Set<string>) {
+function filter(records: BudgetRecord[], budgetNames: Set<string>) {
     return records.filter(ele => budgetNames.has(ele["name"]))
 }
 
@@ -64,8 +63,8 @@ function defaultMonth(y:number){
 export const App: React.FC<{ demo: boolean }> = (props) => {
     const [year, setYear] = useState<number>(defaultYear());
     const [month, setMonth] = useState<number>(defaultMonth(year));
-    const [dataset, setDataset] = useState<Map<number, BudgetBreakdownRecord[]>>(new Map());
-    const [currentDataset, setCurrentDataset] = useState<BudgetBreakdownRecord[]>([]);
+    const [dataset, setDataset] = useState<Map<number, BudgetRecord[]>>(new Map());
+    const [currentDataset, setCurrentDataset] = useState<BudgetRecord[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [showAggregate, setShowAggregate] = useState<boolean>(false);
     const [monthList, setMonthList] = useState<number[]>(defaultMonthlist(year));
@@ -73,7 +72,7 @@ export const App: React.FC<{ demo: boolean }> = (props) => {
     const [demoMode, setDemoMode] = useState<boolean>(props.demo);
     const [loadError, setLoadError] = useState<string | null>(null);
     const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
-    
+
     function loadData(year: number, isDemo:boolean, reset: boolean = false) {
         let localDataSet = dataset
 
@@ -92,7 +91,7 @@ export const App: React.FC<{ demo: boolean }> = (props) => {
                     localDataSet.set(year, loadedData);
                     setIsLoading(false);
                     setDataset(localDataSet);
-                    setCurrentDataset(localDataSet.get(year) as BudgetBreakdownRecord[]);
+                    setCurrentDataset(localDataSet.get(year) as BudgetRecord[]);
                     setLoadError(null);
                 }, 500);
             } else {
@@ -103,7 +102,7 @@ export const App: React.FC<{ demo: boolean }> = (props) => {
                     localDataSet.set(year, loadedData);
                     setIsLoading(false);
                     setDataset(localDataSet);
-                    setCurrentDataset(localDataSet.get(year) as BudgetBreakdownRecord[]);
+                    setCurrentDataset(localDataSet.get(year) as BudgetRecord[]);
                     setLoadError(null);
                 }).catch((err: any) => {
                     setIsLoading(false);
@@ -185,7 +184,7 @@ export const App: React.FC<{ demo: boolean }> = (props) => {
                             }}
                     />
                     {!demoMode &&  <Button variant='dark' size="sm" onClick={refreshAccount} disabled={isRefreshing}><i className="bi bi-arrow-counterclockwise"></i></Button>}
-                    
+
                     <Dropdown as="span">
                         <Dropdown.Toggle variant="dark" size="sm" id="dropdown-basic">
                             {year === 0 ? "Choose Year" : year}
@@ -232,7 +231,14 @@ export const App: React.FC<{ demo: boolean }> = (props) => {
                             :
                             <>
                                 <div className="align-middle ps-2 ps-md-0" style={{ height: "calc(min(800px,100vh))" }}>
-                                    <BreakdownChart year={year} month={month} showCurrent={year === (new Date()).getFullYear()} showAggregate={showAggregate} value={filter(currentDataset, selectedBudget)} />
+                                    <BudgetChart config={{
+                                      year: year,
+                                      month: month,
+                                      showCurrentLine: year === (new Date()).getFullYear(),
+                                      showAggregate: showAggregate,
+                                      locale: "en-GB",
+                                      currency: "GBP"
+                                    }} value={filter(currentDataset, selectedBudget)} />
                                 </div>
                                 <div className='text-center'>
 
@@ -268,8 +274,8 @@ export const App: React.FC<{ demo: boolean }> = (props) => {
                                 <ListGroup>
                                     {
                                         currentDataset.map((ele, index) => {
-                                            const difference = ele.monthlyAmount.GBP[month] - ele.monthlyBudget.amount
-                                            const percentage = ele.monthlyAmount.GBP[month] / ele.monthlyBudget.amount * 100
+                                            const difference = ele.monthlyAmount[month] - ele.monthlyBudget
+                                            const percentage = ele.monthlyAmount[month] / ele.monthlyBudget * 100
                                             const animated = selectedBudget.has(ele.name)
                                             const variant = percentage >= 100 ? "danger" : percentage > 90 ? "warning" : percentage > 80 ? "info" : "success"
 
@@ -296,12 +302,12 @@ export const App: React.FC<{ demo: boolean }> = (props) => {
                                                 </div>
                                                 <OverlayTrigger key={`overlay-trigger-${index}`} placement="bottom" overlay={
                                                     <Tooltip id={`tooltip-${index}`} className="d-md-none">
-                                                        {displayAmount(ele.monthlyAmount.GBP[month])}
+                                                        {displayAmount(ele.monthlyAmount[month])}
                                                     </Tooltip>
                                                 }>
                                                 <div className='float-end ps-2' style={{ "width": "calc(100% - 40px)" }}>
                                                     <b>{ele.name} </b>
-                                                    <small className='d-none d-md-inline-block'>({displayAmount(ele.monthlyAmount.GBP[month])})</small>
+                                                    <small className='d-none d-md-inline-block'>({displayAmount(ele.monthlyAmount[month])})</small>
                                                     <span className='float-end '>{labelElement}</span>
                                                     <div className="clearfix"></div>
                                                     <div className='pt-1'>
