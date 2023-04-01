@@ -1,9 +1,10 @@
 {
   "name": "moneydashboard-report",
   "version": "0.0.1",
-  "description": "TypeScript + Express API Server",
-  "author": "",
-  "license": "ISC",
+  "private": true,
+  "description": "Budget report for MoneyDashboard",
+  "author": "iLeoDo",
+  "license": "MIT",
   "scripts": {
     "start": "npm run build && cross-env NODE_ENV=production node dist/server.js",
     "dev": "cross-env NODE_ENV=development nodemon",
